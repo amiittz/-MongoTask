@@ -8,8 +8,8 @@ module.exports = {
             country: p.country
         }));
     },
-    setAuthor: async () => {//עדכון
-        
+    setAuthor: async (name,country) => {//מעדכן מדינה לפי שם
+        await Author.updateOne({ name: name }, { $set: { country: country } });
     },
     createAuthor: async (name,country) => { //הוספה
         const author = new Author({name,country});

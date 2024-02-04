@@ -23,8 +23,8 @@ module.exports = {
     updateAuthor: async (req, res) => {
         try {
             console.log(req.body);
-            const { name, country,_id } = req.body
-            await setAuthor(_id,name,country)
+            const { name, country} = req.body
+            await setAuthor(name,country)
             res.json('success')
         }
         catch (err) {
