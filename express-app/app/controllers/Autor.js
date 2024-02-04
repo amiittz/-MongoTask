@@ -1,10 +1,10 @@
-const { getAllBooks, setAuthor, createAuthor } = require('../services/Author')
+const { getAllAuthors, setAuthor, createAuthor } = require('../services/Author')
 
 module.exports = {
     listAuthors: async (req, res) => {
         try {
-            const products = await getAllBooks()
-            res.json(products)
+            const authors = await getAllAuthors()
+            res.json(authors)
         }
         catch (err) {
             res.status(500).send(err)
@@ -13,8 +13,8 @@ module.exports = {
     addAuthor: async (req, res) => {
         try {
             const { name, country } = req.body
-            await createAuthor(name,country)
-            res.json('success')
+            const author = await createAuthor(name,country)
+            res.json(author)
         }
         catch (err) {
             res.status(500).send(err)

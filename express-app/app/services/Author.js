@@ -1,18 +1,18 @@
-const Aothor = require("../models/Author")
+const Author = require("../models/Author")
 
 module.exports = {
-    getAllBooks: async () => {
-        const allBooks = await Author.findAll();
-        return allProducts.map(p => ({
-            id: p._id,
-            name: p.name
+    getAllAuthors: async () => {
+        const allAuthors = await Author.find();
+        return allAuthors.map(p => ({
+            name: p.name,
+            country: p.country
         }));
     },
     setAuthor: async () => {//עדכון
         
     },
-    createAuthor: async (id,name,country) => { //הוספה
-        const author = new Author({id,name,country});
+    createAuthor: async (name,country) => { //הוספה
+        const author = new Author({name,country});
         return author.save();
     }
 }
