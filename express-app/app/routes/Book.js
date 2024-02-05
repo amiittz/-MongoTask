@@ -3,6 +3,7 @@ const router = require('express').Router();
 const cacheNoStore = require('../middlewares/cacheNoStore')
 
 router.get('', cacheNoStore, controller.listBooks);
+router.post('/add',cacheNoStore, controller.addBook);
 
 
 module.exports = router;
