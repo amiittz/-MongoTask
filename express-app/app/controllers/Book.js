@@ -1,4 +1,4 @@
-const { getAllBooks, createBook, delBook, searchName, searchGenre} = require('../services/Book')
+const { getAllBooks, createBook, delBook, searchName, searchGenre,searchYear,searchCountry} = require('../services/Book')
 const Author = require("../models/Author");
 
 
@@ -46,5 +46,21 @@ module.exports = {
         }catch (err) {
             res.status(500).send(err)
         }
-    }
+    },
+    searchByYear:async (req, res) =>{
+        try{
+            const {start, end}= req.body;
+            res.json(await searchYear(start, end));
+        }catch (err) {
+            res.status(500).send(err)
+        }
+    },
+    searchByCountry:async (req, res) =>{
+        try{
+            const {country}= req.body;
+            res.json(await searchCountry(country));
+        }catch (err) {
+            res.status(500).send(err)
+        }
+    },
 }

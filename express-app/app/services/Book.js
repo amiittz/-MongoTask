@@ -1,5 +1,5 @@
 const Book = require("../models/Book")
-const author=require("../models/Author");
+const author = require("../models/Author");
 
 module.exports = {
     getAllBooks: async () => {
@@ -37,6 +37,24 @@ module.exports = {
     searchGenre: async(genre) => {
         const temp= Book.find({genres:genre});
         return temp;
-    }
-    
+    },
+    searchYear: async(s,e)=>{
+        const temp=Book.find({ publishingYear: { $gte: s, $lte: e } });
+        return temp;
+    },
+    searchCountry: async(c)=>{
+        const books = Book.aggregate([
+            {
+              '$unwind': {
+                'path': '$authors', 
+                'preserveNullAndEmptyArrays': false
+              }
+            }, {
+              '$match': {
+                'authors.country': c
+              }
+            }
+          ])
+          return books
+    },
 }
