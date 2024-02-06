@@ -1,5 +1,6 @@
 const Book = require("../models/Book")
 const author=require("../models/Author");
+
 module.exports = {
     getAllBooks: async () => {
         const allBooks = await Book.find();
@@ -25,7 +26,17 @@ module.exports = {
             res.status(500).send(err)
         }
     },
-
-
+    delBook: async(id)=>{
+        const temp= Book.findByIdAndDelete(id);
+        return temp;
+    },
+    searchName: async(bookName) => {
+        const temp= Book.find({title:{ $regex: bookName, $options: 'i' }});
+        return temp;
+    },
+    searchGenre: async(genre) => {
+        const temp= Book.find({genres:genre});
+        return temp;
+    }
     
 }

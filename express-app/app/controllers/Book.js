@@ -1,4 +1,4 @@
-const { getAllBooks, createBook} = require('../services/Book')
+const { getAllBooks, createBook, delBook, searchName, searchGenre} = require('../services/Book')
 const Author = require("../models/Author");
 
 
@@ -22,4 +22,29 @@ module.exports = {
             res.status(500).send(err)
         }
     },
+    deleteBook: async (req, res) => {
+        try {
+            const book_id =req.body;
+            res.json(await delBook(book_id));
+        }
+        catch (err) {
+            res.status(500).send(err)
+        }
+    },
+    searchByName: async (req, res) =>{
+        try{
+            const {title}=req.body;
+            res.json(await searchName(title));
+        }catch (err) {
+            res.status(500).send(err)
+        }
+    },
+    searchByGenre: async (req, res) =>{
+        try{
+            const {genre}=req.body;
+            res.json(await searchGenre(genre));
+        }catch (err) {
+            res.status(500).send(err)
+        }
+    }
 }
